@@ -3,7 +3,18 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --global-black: #1a1a1a;
+  --global-light: #cdcdcd;
+  --global-red: #d60404;
+  --global-visited: #2421e7;
+}
+p, a, span, h1, h2, h3, h4, h5 {
+  color: var(--global-black);
+}
 h1 {
   font-size: 4rem;
-  color: blue;
+}
+a:visited, a:hover {
+  color: var(--global-visited);
 }
