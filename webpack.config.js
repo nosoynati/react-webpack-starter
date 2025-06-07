@@ -6,11 +6,19 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => {
   const devMode = argv.mode !== "production";
+
   return {
     entry: "./src/main.js",
     output: {
-      filename: "main.js",
+      filename: "[name].bundle.js",
       path: path.resolve(__dirname, "build"),
+      clean: true,
+    },
+    devtool: "inline-source-map",
+    devServer: {
+      static: "./build",
+      hot: true,
+      port: 8000,
     },
     plugins: [
       new HtmlWebpackPlugin({
@@ -18,10 +26,12 @@ module.exports = (env, argv) => {
       }),
       new MiniCssExtractPlugin({
         filename: "[name].css",
-        chunkFilename: "[id].css"
+        chunkFilename: "[id].css",
       }),
     ],
-
+    optimization: {
+      runtimeChunk: "single",
+    },
     module: {
       rules: [
         {
@@ -39,7 +49,11 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.css$/i,
-          use: [devMode ? "style-loader" : MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+          use: [
+            devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+            "css-loader",
+            "sass-loader",
+          ],
         },
         {
           test: /\.(png|jpe?g|svg)$/i,
@@ -47,8 +61,8 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.s[ac]ss$/i,
-          use: [ "style-loader", "css-loader", "sass-loader"]
-        }
+          use: ["style-loader", "css-loader", "sass-loader"],
+        },
       ],
     },
   };
