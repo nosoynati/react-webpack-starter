@@ -1,11 +1,13 @@
 import Main from "./components/Main/Main.jsx";
+import About from "./components/about/About.jsx";
 
 function App() {
+
   return (
-    <>
-      <h1>Hello!</h1>
-      <Main />
-    </>
+    <div className="main">
+      <Main message="Hola, no soy nati"/>
+      <About />
+    </div>
   );
 }
 export default App;
