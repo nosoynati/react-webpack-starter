@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 
 const path = require("path");
-const package = require("./package.json")
-const commonPaths = require("./build_utils/config/commonPaths")
+const package = require("./package.json");
+const commonPaths = require("./build_utils/config/commonPaths");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -17,24 +17,23 @@ module.exports = (env, argv) => {
       publicPath: "/",
       path: commonPaths.outputPath,
       chunkFilename: `${package.version}/js/[name].[chunkhash:8].js`,
-      crossOriginLoading: "anonymous"
-      
+      crossOriginLoading: "anonymous",
     },
     devServer: {
       port: 8000,
       static: {
         directory: commonPaths.outputPath,
-
       },
       historyApiFallback: {
-        index: "/"
+        index: "/",
       },
       webSocketServer: false,
-      hot: true
+      hot: true,
     },
+
     plugins: [
       new HtmlWebpackPlugin({
-        template: path.join(__dirname, "index.html")
+        template: path.join(__dirname, "index.html"),
       }),
       new MiniCssExtractPlugin({
         filename: "[name].css",
@@ -76,6 +75,9 @@ module.exports = (env, argv) => {
           use: ["style-loader", "css-loader", "sass-loader"],
         },
       ],
+    },
+    resolve: {
+      extensions: ["*", ".js", ".jsx"],
     },
   };
 };
