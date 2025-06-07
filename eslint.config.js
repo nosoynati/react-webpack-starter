@@ -18,11 +18,12 @@ export default [
       },
     },
     settings: { react: { version: '18.3' } },
-    plugins: {
+    plugins: [
       react,
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-    },
+      {'react-hooks': reactHooks,
+      'react-refresh': reactRefresh}
+    ],
+     "extends": ["eslint:all", "plugin:react/all"],
     rules: {
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,

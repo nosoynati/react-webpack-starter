@@ -1,10 +1,9 @@
 import React from 'react'
 
-const Main = () => {
+const Main = ({message}) => {
   return (
     <div>
-    <p>I'm a component, change me!</p>
-      
+      <p>{message}</p>
     </div>
   )
 }
