@@ -1,8 +1,8 @@
-import React from 'react'
+import './Main.scss'
 
 const Main = ({message}) => {
   return (
-    <div>
+    <div className="main--inner">
       <p>{message}</p>
     </div>
   )
