@@ -2,11 +2,17 @@ name: "Imple"
 
 on:
   push:
-    branches: ["imple"]
+    branches: ["imple","master"]
 
 jobs:
   deploy-imple:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "Pulish!"
+      - name: test
+        uses: actions/checkout@v4
+        run: echo "Pulish!"
+
+      - name: setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
