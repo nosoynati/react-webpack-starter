@@ -1,7 +1,17 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .main--inner {
-  display: flex;
-  height: calc(100vh - 1.2rem);
-  width: 100vw;
-  margin: auto;
-  justify-content: center;
+
+  p {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
 }

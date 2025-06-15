@@ -1,11 +1,13 @@
-import './Main.scss'
+import "./Main.scss";
 
-const Main = ({message}) => {
+const Main = ({ message }) => {
   return (
-    <div className="main--inner">
-      <p>{message}</p>
-    </div>
-  )
-}
+    
+      <div className="main--inner">
+        <p>{message}</p>
+      </div>
+    
+  );
+};
 
-export default Main
+export default Main;

@@ -2,7 +2,7 @@ name: "Imple"
 
 on:
   push:
-    branches: ["imple","master"]
+    branches: ["imple"]
 
 jobs:
   deploy-imple:

@@ -18,3 +18,16 @@ h1 {
 a:visited, a:hover {
   color: var(--global-visited);
 }
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+.main--inner {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
