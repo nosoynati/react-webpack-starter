@@ -1,83 +1,69 @@
-/* eslint-disable no-undef */
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-const path = require("path");
-const package = require("./package.json");
-const commonPaths = require("./build_utils/config/commonPaths");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const isProduction = process.env.NODE_ENV === 'production';
 
-module.exports = (env, argv) => {
-  const devMode = argv.mode !== "production";
-
-  return {
-    entry: commonPaths.entryPath,
-    output: {
-      filename: `${package.version}/js/[name].[chunkhash:8].js`,
-      uniqueName: package.name,
-      publicPath: "/",
-      path: commonPaths.outputPath,
-      chunkFilename: `${package.version}/js/[name].[chunkhash:8].js`,
-      crossOriginLoading: "anonymous",
-    },
-    devServer: {
-      port: 8000,
-      static: {
-        directory: commonPaths.outputPath,
-      },
-      historyApiFallback: {
-        index: "/",
-      },
-      webSocketServer: false,
-      hot: true,
-    },
-
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: path.join(__dirname, "index.html"),
-      }),
-      new MiniCssExtractPlugin({
-        filename: "[name].css",
-        chunkFilename: "[id].css",
-      }),
-    ],
-    optimization: {
-      runtimeChunk: "single",
-    },
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-            options: {
-              presets: [
-                ["@babel/preset-env", { targets: "defaults" }],
-                ["@babel/preset-react", { runtime: "automatic" }],
-              ],
-            },
+module.exports = {
+  entry: './src/main.js',
+  output: {
+    filename: 'bundle.[contenthash].js',
+    path: path.resolve(__dirname, 'build'),
+    clean: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              !isProduction && require.resolve('react-refresh/babel'),
+            ].filter(Boolean),
           },
         },
-        {
-          test: /\.css$/i,
-          use: [
-            devMode ? "style-loader" : MiniCssExtractPlugin.loader,
-            "css-loader",
-            "sass-loader",
-          ],
-        },
-        {
-          test: /\.(png|jpe?g|svg)$/i,
-          type: "asset/resource",
-        },
-        {
-          test: /\.s[ac]ss$/i,
-          use: ["style-loader", "css-loader", "sass-loader"],
-        },
-      ],
-    },
-    resolve: {
-      extensions: ["*", ".js", ".jsx"],
-    },
-  };
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      favicon: './public/favicon.ico',
+    }),
+    ...(!isProduction ? [new ReactRefreshWebpackPlugin()] : []),
+    ...(isProduction ? [new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' })] : []),
+  ],
+  devServer: {
+    static: path.join(__dirname, 'public'),
+    compress: true,
+    port: 3000,
+    open: true,
+    hot: true,
+  },
+  mode: isProduction ? 'production' : 'development',
 };

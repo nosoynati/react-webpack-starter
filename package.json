@@ -8,21 +8,25 @@
     "build": "webpack --mode production",
     "sass": "sass --watch --update --style=expanded src/style/sass:public/css",
     "sass-prod": "sass --no-source-map --style=compressed src/style/sass:build/style/css",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{js,jsx,scss,css,md}\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@babel/runtime":"^7.22.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^7.6.2",
     "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
+    "@babel/core":"^7.22.0",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@eslint/js": "^9.18.0",
     "@types/react": "^19.0.6",
     "@types/react-dom": "^19.0.3",
@@ -31,6 +35,7 @@
     "eslint": "^9.18.0",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-jsx-a11y":"^6.7.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
     "html-webpack-plugin": "^5.6.3",
@@ -38,8 +43,20 @@
     "sass": "^1.83.1",
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
+    "react-refresh":"^0.14.0",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0"
+  },
+  
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{css,scss,json,md}": [
+      "prettier --write"
+    ]
   }
+
 }
