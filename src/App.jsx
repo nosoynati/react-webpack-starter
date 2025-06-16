@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="main">
     <Header />
-      <Main message="Hola, no soy nati"/>
+      <Main message="Hola, soy Natasha y no soy Nati"/>
     </div>
   );
 }
