@@ -1,13 +1,14 @@
-import Header from "./components/header/Header.jsx";
-import Main from "./components/Main/Main.jsx";
-
+import { Suspense } from "react";
+import AppRoutes from "./routes/AppRoutes.jsx";
+import Loader from "./components/Loader/Loader.jsx";
+import MainLayout from "./layouts/MainLayout.jsx";
 function App() {
-
   return (
-    <div className="main">
-    <Header />
-      <Main message="Hola, no soy nati"/>
-    </div>
+    <Suspense fallback={<Loader />}>
+      <MainLayout>
+        <AppRoutes />
+      </MainLayout>
+    </Suspense>
   );
 }
 export default App;
