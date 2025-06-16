@@ -17,8 +17,8 @@ const About = () => {
     <div className="main--inner">
 
       <div className="intro">
-        <p>Soy Natasha, soy desarrolladora web, especializada en front end, o sea el revoque.</p>
-        <p>Este es mi portfolio, y como es mío yo lo hago como quiero</p>
+        <p className="intro">Soy Natasha, soy desarrolladora web, especializada en front end, o sea el revoque.</p>
+        <p className="intro">Este es mi portfolio, y como es mío yo lo hago como quiero</p>
       </div>
     </div>
   );

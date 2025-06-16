@@ -1,3 +1,5 @@
+import './Contact.scss';
+
 const mandar = (e) => {
   e.preventDefault()
   console.log("super!");
