@@ -1,5 +1,3 @@
-import React from "react";
-
 const mandar = (e) => {
   e.preventDefault()
   console.log("super!");
@@ -9,8 +7,11 @@ function Contact() {
   return (
     <div className="main--inner">
       <div className="form--wrapper">
-        <h2>Escribime, o no</h2>
-        <form onSubmit={mandar}>
+        <p className="title">Escribime</p>
+        <p></p>
+        <p>...O no, es un mundo libre</p>
+
+        <form onSubmit={mandar} className="form">
           <label htmlFor="nombre">
             <input type="text" id="nombre" placeholder="nombre"></input>
           </label>
@@ -19,6 +20,7 @@ function Contact() {
           </label>
           <button type="submit">Enviar</button>
         </form>
+        
       </div>
     </div>
   );
