@@ -1,6 +1,12 @@
 import "./About.scss";
 import { useState } from "react";
 
+
+// setTimeout(()=> {
+
+// },500)
+
+
 const AboutPre = () => {
   return (
     <div className="main--inner">
@@ -10,7 +16,6 @@ const AboutPre = () => {
 };
 
 // const [ time, setTime ] = useState("")
-
 
 const About = () => {
   return (
